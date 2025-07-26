@@ -1,0 +1,33 @@
+{
+  "$schema": "./node_modules/@types/package.json",
+  "name": "ii-integration",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "setup": "npm install && npm run update",
+    "update": "npm run expo-icp:update",
+    "expo-icp:update": "npx -p expo-icp@latest expo-icp update",
+    "build": "npm run typecheck && vite build",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@dfinity/agent": "^2.3.0",
+    "@dfinity/auth-client": "^2.3.0",
+    "@dfinity/identity": "^2.3.0",
+    "canister-manager": "^0.1.7",
+    "expo-icp-app-connect-helpers": "^0.1.5",
+    "expo-icp-frontend-helpers": "^0.1.13",
+    "ii-integration-helpers": "^0.1.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2",
+    "vite": "^7.0.5"
+  }
+}
