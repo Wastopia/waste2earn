@@ -1,13 +1,6 @@
 {
   "canisters": {
-    "internet-identity": {
-      "type": "pull",
-      "id": "rdmx6-jaaaa-aaaaa-aaadq-cai"
-    },
     "ii-integration": {
-      "dependencies": [
-        "internet-identity"
-      ],
       "source": [
         "src/ii-integration/dist"
       ],

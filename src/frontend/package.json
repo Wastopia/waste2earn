@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@dfinity/agent": "file:dfinity-agent-0.20.2.tgz",
-    "@dfinity/auth-client": "^3.0.1",
+    "@dfinity/auth-client": "^0.20.2",
     "@dfinity/bls-verify": "file:dfinity-bls-verify-0.20.2.tgz",
     "@dfinity/candid": "^0.20.2",
     "@dfinity/identity": "^0.20.2",
@@ -48,6 +48,7 @@
     "expo-blur": "~14.1.5",
     "expo-clipboard": "~7.1.4",
     "expo-constants": "~17.1.5",
+    "expo-crypto": "~14.1.5",
     "expo-crypto-universal": "^0.2.12",
     "expo-crypto-universal-native": "^0.2.12",
     "expo-crypto-universal-web": "^0.2.12",
@@ -59,9 +60,9 @@
     "expo-icp-app-connect-helpers": "^0.1.5",
     "expo-icp-frontend-helpers": "^0.1.13",
     "expo-ii-integration": "^0.1.24",
-    "expo-image": "~2.2.0",
+    "expo-image": "~2.4.0",
     "expo-linking": "~7.1.5",
-    "expo-router": "~5.0.7",
+    "expo-router": "~5.1.4",
     "expo-secure-store": "~14.2.3",
     "expo-splash-screen": "~0.30.9",
     "expo-status-bar": "~2.2.3",
@@ -70,20 +71,19 @@
     "expo-storage-universal-web": "^0.3.8",
     "expo-symbols": "~0.4.5",
     "expo-system-ui": "~5.0.8",
-    "expo-web-browser": "~14.1.6",
+    "expo-web-browser": "~14.2.0",
     "jose": "^6.0.11",
     "noble-curves-extended": "^0.2.4",
     "react": "19.0.0",
     "react-dom": "19.0.0",
-    "react-native": "0.79.3",
+    "react-native": "0.79.5",
     "react-native-gesture-handler": "~2.24.0",
     "react-native-reanimated": "~3.17.4",
     "react-native-safe-area-context": "5.4.0",
     "react-native-screens": "~4.11.1",
     "react-native-web": "~0.20.0",
     "react-native-webview": "13.13.5",
-    "u8a-utils": "^1.0.12",
-    "expo-crypto": "~14.1.5"
+    "u8a-utils": "^1.0.12"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
@@ -96,11 +96,11 @@
   "private": true,
   "resolutions": {
     "@dfinity/agent": "0.20.2",
+    "@dfinity/auth-client": "0.20.2",
+    "@dfinity/bls-verify": "0.20.2",
     "@dfinity/candid": "0.20.2",
+    "@dfinity/identity": "0.20.2",
     "@dfinity/principal": "0.20.2",
-    "@noble/hashes": "1.8.0"
-  },
-  "overrides": {
     "@noble/hashes": "1.8.0"
   },
   "expo": {

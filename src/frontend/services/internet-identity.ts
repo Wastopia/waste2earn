@@ -1,6 +1,7 @@
 import { Identity } from '@dfinity/agent';
 import { AuthClient } from '@dfinity/auth-client';
 import * as SecureStore from 'expo-secure-store';
+import { II_CONFIG } from '../constants';
 
 export interface IIAuthState {
   isAuthenticated: boolean;
@@ -38,7 +39,7 @@ class InternetIdentityService {
       }
 
       this.authClient.login({
-        identityProvider: process.env.EXPO_PUBLIC_II_URL || 'https://identity.ic0.app',
+        identityProvider: II_CONFIG.IDENTITY_PROVIDER,
         onSuccess: async () => {
           const identity = this.authClient!.getIdentity();
           this.currentIdentity = identity;
