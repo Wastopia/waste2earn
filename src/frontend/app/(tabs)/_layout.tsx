@@ -43,7 +43,7 @@ export default function TabLayout() {
             ios: { position: 'absolute' },
             default: {},
           }),
-          headerStyle: { height: 110 },
+          headerStyle: { height: 80 },
         }}
       >
         <Tabs.Screen
@@ -63,7 +63,7 @@ export default function TabLayout() {
         <Tabs.Screen
           name="scan"
           options={{
-            title: 'Scan',
+            title: 'Scan & Sort',
             tabBarIcon: ({ color }) => <IconSymbol size={28} name="arrow.2.squarepath" color={color} />,
           }}
         />

@@ -67,7 +67,7 @@ export function ThemeToggle({ size = 24, style }: ThemeToggleProps) {
       >
         <IconSymbol
           size={size}
-          name={isDark ? "sun.max.fill" : "moon.fill"}
+          name={isDark ? "moon.fill" : "sun.max.fill"}
           color={Colors[theme].tint}
         />
       </Animated.View>
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
-    shadowColor: '#000',
+    shadowColor: '#fff',
     shadowOffset: {
       width: 0,
       height: 2,

@@ -1,51 +1,124 @@
-import { ViewStyle, TextStyle } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
-export const remToPx = (rem: number): number => rem * 16;
-
-export const containerStyles: ViewStyle = {
-  alignItems: 'center',
-  justifyContent: 'center',
-  paddingHorizontal: remToPx(2),
-  paddingVertical: remToPx(2),
-  display: 'flex',
+/**
+ * Cross-platform shadow styles
+ * Ensures consistent shadow rendering across iOS, Android, and Web
+ */
+export const createShadow = (elevation: number = 2, color: string = '#000', opacity: number = 0.1) => {
+  return Platform.select({
+    ios: {
+      shadowColor: color,
+      shadowOffset: { width: 0, height: elevation },
+      shadowOpacity: opacity,
+      shadowRadius: elevation * 1.5,
+    },
+    android: {
+      elevation: elevation,
+    },
+    web: {
+      boxShadow: `0 ${elevation}px ${elevation * 2}px rgba(0, 0, 0, ${opacity})`,
+    },
+  });
 };
 
-export const baseTextStyles: TextStyle = {
-  fontFamily: 'Montserrat, sans-serif',
-  fontSize: remToPx(1),
-  marginBottom: remToPx(1),
+/**
+ * Cross-platform border radius
+ * Ensures consistent border radius rendering
+ */
+export const createBorderRadius = (radius: number) => {
+  return Platform.select({
+    ios: {
+      borderRadius: radius,
+    },
+    android: {
+      borderRadius: radius,
+    },
+    web: {
+      borderRadius: `${radius}px`,
+    },
+  });
 };
 
-export const headerStyles: TextStyle = {
-  ...baseTextStyles,
-  fontSize: remToPx(1.8),
+/**
+ * Cross-platform font family
+ * Ensures consistent font rendering across platforms
+ */
+export const getFontFamily = () => {
+  return Platform.select({
+    ios: {
+      fontFamily: 'System',
+    },
+    android: {
+      fontFamily: 'Roboto',
+    },
+    web: {
+      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+    },
+  });
 };
 
-export const subheaderStyles: TextStyle = {
-  ...baseTextStyles,
-  fontSize: remToPx(1.2),
-};
+/**
+ * Common card styles with consistent shadows
+ */
+export const cardStyles = StyleSheet.create({
+  card: {
+    ...createShadow(2),
+    borderRadius: 12,
+    backgroundColor: 'transparent', // Will be set by theme
+  },
+  cardElevated: {
+    ...createShadow(4),
+    borderRadius: 16,
+    backgroundColor: 'transparent', // Will be set by theme
+  },
+});
 
-export const buttonStyles: ViewStyle = {
-  borderColor: '#c3c3c4',
-  borderWidth: 1,
-  width: '100%',
-  justifyContent: 'center',
-  alignItems: 'center',
-  backgroundColor: 'white',
-  marginBottom: remToPx(1),
-  paddingVertical: remToPx(0.6),
-  paddingHorizontal: remToPx(1),
-  borderRadius: 4,
-};
+/**
+ * Common button styles
+ */
+export const buttonStyles = StyleSheet.create({
+  primary: {
+    ...createShadow(2),
+    borderRadius: 8,
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  secondary: {
+    borderRadius: 8,
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+  },
+});
 
-export const disabledButtonStyles: ViewStyle = {
-  ...buttonStyles,
-  opacity: 0.5,
-};
-
-export const buttonTextStyles: TextStyle = {
-  ...baseTextStyles,
-  marginBottom: 0,
-  fontSize: remToPx(1.2),
-};
+/**
+ * Common text styles with consistent font rendering
+ */
+export const textStyles = StyleSheet.create({
+  title: {
+    ...getFontFamily(),
+    fontSize: 24,
+    fontWeight: 'bold',
+    lineHeight: 32,
+  },
+  subtitle: {
+    ...getFontFamily(),
+    fontSize: 18,
+    fontWeight: '600',
+    lineHeight: 24,
+  },
+  body: {
+    ...getFontFamily(),
+    fontSize: 16,
+    lineHeight: 24,
+  },
+  caption: {
+    ...getFontFamily(),
+    fontSize: 14,
+    lineHeight: 20,
+  },
+});

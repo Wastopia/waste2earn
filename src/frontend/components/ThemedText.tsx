@@ -1,4 +1,4 @@
-import { StyleSheet, Text, type TextProps } from 'react-native';
+import { StyleSheet, Text, type TextProps, Platform } from 'react-native';
 
 import { useThemeColor } from '@/hooks/useThemeColor';
 
@@ -20,7 +20,21 @@ export function ThemedText({
   return (
     <Text
       style={[
-        { color },
+        { 
+          color,
+          // Ensure consistent font rendering across platforms
+          ...Platform.select({
+            ios: {
+              fontFamily: 'System',
+            },
+            android: {
+              fontFamily: 'Roboto',
+            },
+            web: {
+              fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+            },
+          }),
+        },
         type === 'default' ? styles.default : undefined,
         type === 'title' ? styles.title : undefined,
         type === 'defaultSemiBold' ? styles.defaultSemiBold : undefined,
@@ -55,6 +69,6 @@ const styles = StyleSheet.create({
   link: {
     lineHeight: 30,
     fontSize: 16,
-    color: '#0a7ea4',
+    color: '#19c206',
   },
 });
