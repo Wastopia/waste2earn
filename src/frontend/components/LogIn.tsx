@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import { Pressable, Text, StyleSheet } from 'react-native';
 import { usePathname } from 'expo-router';
-import { buttonTextStyles } from './styles';
-import { useIIIntegrationContext } from 'expo-ii-integration';
+import { buttonStyles } from './styles';
+import { useIdentity } from '@/components/IdentityWrapper';
 import { useErrorToast } from 'expo-error-toast';
 
 /**
  * Component that handles the login functionality
  */
 export const LogIn = () => {
-  const { login } = useIIIntegrationContext();
+  const { login, authState } = useIdentity();
   const [busy, setBusy] = useState(false);
   const { showError } = useErrorToast();
   const pathname = usePathname();
@@ -17,15 +17,21 @@ export const LogIn = () => {
   const handleLogin = async () => {
     setBusy(true);
     try {
-      await login({
-        redirectPath: pathname,
-      });
+      console.log('🔐 Starting login process...');
+      await login();
+      console.log('✅ Login completed successfully');
     } catch (error) {
+      console.error('❌ Login failed:', error);
       showError(error);
     } finally {
       setBusy(false);
     }
   };
+
+  // Don't show login button if already authenticated
+  if (authState.isAuthenticated) {
+    return null;
+  }
 
   return (
     <Pressable
@@ -61,7 +67,6 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   headerButtonText: {
-    ...buttonTextStyles,
     color: '#FFFFFF',
     fontSize: 15,
     fontWeight: '600',

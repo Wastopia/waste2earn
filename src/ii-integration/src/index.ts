@@ -15,8 +15,10 @@ import {
 
 const main = async (): Promise<void> => {
   try {
-    // Use mainnet Internet Identity for local development
-    const internetIdentityCanisterId = 'rdmx6-jaaaa-aaaaa-aaadq-cai'; // Mainnet II canister ID
+    // Use local Internet Identity for local development, mainnet for production
+    const internetIdentityCanisterId = DFX_NETWORK === 'local' 
+      ? 'rdmx6-jaaaa-aaaaa-aaadq-cai' // Local II canister ID
+      : 'rdmx6-jaaaa-aaaaa-aaadq-cai'; // Mainnet II canister ID (same ID)
     
     // Get URL parameters
     const urlParams = new URLSearchParams(window.location.search);

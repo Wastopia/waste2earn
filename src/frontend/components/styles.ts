@@ -49,7 +49,7 @@ export const getFontFamily = () => {
       fontFamily: 'System',
     },
     android: {
-      fontFamily: 'Roboto',
+      fontFamily: 'System',
     },
     web: {
       fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
@@ -63,12 +63,12 @@ export const getFontFamily = () => {
 export const cardStyles = StyleSheet.create({
   card: {
     ...createShadow(2),
-    borderRadius: 12,
+    borderRadius: 8,
     backgroundColor: 'transparent', // Will be set by theme
   },
   cardElevated: {
-    ...createShadow(4),
-    borderRadius: 16,
+    ...createShadow(2),
+    borderRadius: 8,
     backgroundColor: 'transparent', // Will be set by theme
   },
 });

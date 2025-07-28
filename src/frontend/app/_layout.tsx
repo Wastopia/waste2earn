@@ -12,6 +12,7 @@ import { View, ActivityIndicator } from 'react-native';
 import * as Linking from 'expo-linking';
 import * as jose from 'jose';
 import { ThemeProvider } from '@/contexts/ThemeContext';
+import { IdentityWrapper } from '@/components/IdentityWrapper';
 
 import {
   LOCAL_IP_ADDRESS,
@@ -167,13 +168,15 @@ function RootLayoutNav() {
     () => (
       <ThemeProvider>
         <IIIntegrationProvider value={iiIntegration}>
-          <Stack
-            screenOptions={{
-              headerShown: false,
-            }}
-          >
-            <Stack.Screen name="(tabs)" />
-          </Stack>
+          <IdentityWrapper>
+            <Stack
+              screenOptions={{
+                headerShown: false,
+              }}
+            >
+              <Stack.Screen name="(tabs)" />
+            </Stack>
+          </IdentityWrapper>
         </IIIntegrationProvider>
       </ThemeProvider>
     ),

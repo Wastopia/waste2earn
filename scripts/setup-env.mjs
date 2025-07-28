@@ -198,6 +198,7 @@ const generateEnvFiles = async (
 
 export const LOCAL_IP_ADDRESS = '${localIPAddress}';
 export const DFX_NETWORK = '${dfxNetwork}';
+export const CANISTER_ID_INTERNET_IDENTITY = 'rdmx6-jaaaa-aaaaa-aaadq-cai';
 ${canisterIdConstants}
 export const EXPO_SCHEME = '${expoScheme}';
 `;

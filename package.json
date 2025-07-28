@@ -7,6 +7,7 @@
   "type": "module",
   "scripts": {
     "setup": "npm install && npm run delete:canister-ids && npm run delete:aasa && npm run init:app-json && npm run ii:setup && npm run frontend:setup && npm run ii-integration:setup",
+    "setup:ii": "node scripts/setup-ii.mjs",
     "dfx:start": "dfxvm update && dfx start --clean",
     "dfx:deploy": "dfx deps deploy && dfx deploy --yes",
     "dfx:deploy:playground": "dfx deploy --playground --yes",

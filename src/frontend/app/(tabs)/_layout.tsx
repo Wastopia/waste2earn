@@ -6,7 +6,7 @@ import { Tabs } from 'expo-router';
 import { LogIn } from '@/components/LogIn';
 import { LogOut } from '@/components/LogOut';
 import { ThemeToggle } from '@/components/ThemeToggle';
-import { IIIntegrationProvider, useIIIntegrationContext } from 'expo-ii-integration';
+import { useIdentity } from '@/components/IdentityWrapper';
 import { useThemeContext } from '@/contexts/ThemeContext';
 import { Colors } from '@/constants/Colors';
 import { HapticTab } from '@/components/HapticTab';
@@ -23,65 +23,69 @@ function TabBarIcon(props: {
 }
 
 export default function TabLayout() {
-  const iiContext = useIIIntegrationContext();
+  const { authState } = useIdentity();
   const { theme } = useThemeContext();
 
   return (
-    <IIIntegrationProvider value={iiContext}>
-      <Tabs
-        screenOptions={{
-          tabBarActiveTintColor: Colors[theme].tint,
-          headerRight: () => (
-            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
-              <ThemeToggle />
-              {iiContext.isAuthenticated ? <LogOut /> : <LogIn />}
-            </View>
-          ),
-          tabBarButton: HapticTab,
-          tabBarBackground: TabBarBackground,
-          tabBarStyle: Platform.select({
+    <Tabs
+      screenOptions={{
+        tabBarActiveTintColor: Colors[theme].tabBarActiveTint,
+        tabBarInactiveTintColor: Colors[theme].tabBarInactiveTint,
+        tabBarStyle: {
+          ...Platform.select({
             ios: { position: 'absolute' },
             default: {},
           }),
-          headerStyle: { height: 80 },
+          backgroundColor: Colors[theme].tabBarBackground,
+          borderTopColor: Colors[theme].tabBarBorder,
+          borderTopWidth: 1,
+        },
+        headerRight: () => (
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+            <ThemeToggle />
+            {authState.isAuthenticated ? <LogOut /> : <LogIn />}
+          </View>
+        ),
+        tabBarButton: HapticTab,
+        tabBarBackground: TabBarBackground,
+        headerStyle: { height: 80 },
+      }}
+    >
+      <Tabs.Screen
+        name="index"
+        options={{
+          title: 'Home',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
         }}
-      >
-        <Tabs.Screen
-          name="index"
-          options={{
-            title: 'Home',
-            tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
-          }}
-        />
-        <Tabs.Screen
-          name="journey"
-          options={{
-            title: 'Journey',
-            tabBarIcon: ({ color }) => <IconSymbol size={28} name="leaf.fill" color={color} />,
-          }}
-        />
-        <Tabs.Screen
-          name="scan"
-          options={{
-            title: 'Scan & Sort',
-            tabBarIcon: ({ color }) => <IconSymbol size={28} name="arrow.2.squarepath" color={color} />,
-          }}
-        />
-        <Tabs.Screen
-          name="rewards"
-          options={{
-            title: 'Rewards',
-            tabBarIcon: ({ color }) => <IconSymbol size={28} name="star.fill" color={color} />,
-          }}
-        />
-        <Tabs.Screen
-          name="profile"
-          options={{
-            title: 'Profile',
-            tabBarIcon: ({ color }) => <IconSymbol size={28} name="person.2.fill" color={color} />,
-          }}
-        />
-      </Tabs>
-    </IIIntegrationProvider>
+      />
+      <Tabs.Screen
+        name="journey"
+        options={{
+          title: 'Journey',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="leaf.fill" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="scan"
+        options={{
+          title: 'Scan & Sort',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="arrow.2.squarepath" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="rewards"
+        options={{
+          title: 'Rewards',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="star.fill" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: 'Profile',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="person.2.fill" color={color} />,
+        }}
+      />
+    </Tabs>
   );
 }
