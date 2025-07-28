@@ -1,4 +1,4 @@
-# `expo-icp`
+# `Waste2Earn IC-Expo-app`
 
 This is a template project that enables the use of Internet Identity in Expo Web and Native apps.
 
