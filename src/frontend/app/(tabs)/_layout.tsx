@@ -7,8 +7,8 @@ import { LogIn } from '@/components/LogIn';
 import { LogOut } from '@/components/LogOut';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { IIIntegrationProvider, useIIIntegrationContext } from 'expo-ii-integration';
+import { useThemeContext } from '@/contexts/ThemeContext';
 import { Colors } from '@/constants/Colors';
-import { useTheme } from '@/hooks/useTheme';
 import { HapticTab } from '@/components/HapticTab';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 import TabBarBackground from '@/components/ui/TabBarBackground';
@@ -23,18 +23,18 @@ function TabBarIcon(props: {
 }
 
 export default function TabLayout() {
-  const ctx = useIIIntegrationContext();
-  const { theme } = useTheme();
+  const iiContext = useIIIntegrationContext();
+  const { theme } = useThemeContext();
 
   return (
-    <IIIntegrationProvider value={ctx}>
+    <IIIntegrationProvider value={iiContext}>
       <Tabs
         screenOptions={{
           tabBarActiveTintColor: Colors[theme].tint,
           headerRight: () => (
             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
               <ThemeToggle />
-              {ctx.isAuthenticated ? <LogOut /> : <LogIn />}
+              {iiContext.isAuthenticated ? <LogOut /> : <LogIn />}
             </View>
           ),
           tabBarButton: HapticTab,
@@ -68,10 +68,17 @@ export default function TabLayout() {
           }}
         />
         <Tabs.Screen
-          name="explore"
+          name="rewards"
           options={{
-            title: 'Explore',
-            tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+            title: 'Rewards',
+            tabBarIcon: ({ color }) => <IconSymbol size={28} name="star.fill" color={color} />,
+          }}
+        />
+        <Tabs.Screen
+          name="profile"
+          options={{
+            title: 'Profile',
+            tabBarIcon: ({ color }) => <IconSymbol size={28} name="person.2.fill" color={color} />,
           }}
         />
       </Tabs>
